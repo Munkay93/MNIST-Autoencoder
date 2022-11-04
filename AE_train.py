@@ -60,7 +60,7 @@ def main():
     # setup figures for progress results
     num_progress_steps = 5
     step_size = int(num_epochs/num_progress_steps)
-    fig = plt.figure(constrained_layout=True, figsize=(10, 8))
+    fig = plt.figure()
     subfigs = fig.subfigures(2,1, wspace=0.07)
     subfigs[0].suptitle('Ground Truth')
     subfigs[1].suptitle('Reconstruction')
