@@ -4,7 +4,8 @@
 .vscode
 info.log
 
-/results/*
+/results/training/*
+/results/inference/*
 !/results/training/01_Examples/
 !/results/inference/01_Examples/
 
