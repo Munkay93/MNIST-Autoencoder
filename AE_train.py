@@ -55,7 +55,7 @@ def main():
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(params=model.parameters() ,lr=1e-3)
 
-    num_epochs = 100
+    num_epochs = 1
     dict_losses = {  'epochs': [],
                     'train_losses': [],
                     'validation_losses': []}
