@@ -34,9 +34,9 @@ def main():
     trainset = MNIST(root=dir_datasets, train=True, download=True, transform=transform)
     testset = MNIST(root=dir_datasets, train=False, transform=transform)
 
-    indices = torch.arange(1000)
-    trainset = Subset(trainset, indices)
-    testset = Subset(testset, indices)
+    # indices = torch.arange(1000)
+    # trainset = Subset(trainset, indices)
+    # testset = Subset(testset, indices)
 
     # create Dataloaders
     trainloader = DataLoader(dataset=trainset, batch_size=64)
@@ -53,7 +53,7 @@ def main():
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(params=model.parameters() ,lr=1e-3)
     save_best_model = SaveBestModel()
-    num_epochs = 5
+    num_epochs = 100
     checkpoint_path = os.path.join(dir_run, 'checkpoint.pt')
     model_path = os.path.join(dir_run, 'model.pt')
 
