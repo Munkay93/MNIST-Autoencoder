@@ -4,15 +4,14 @@ from torch.utils.data import DataLoader, Subset
 from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
 import torch.nn as nn
-from library.models import DeepAutoEncoder
-from utils import train, validation
 from datetime import datetime
 import os
 import logging
 import pickle
 # My Modules
 from library.utils import makedir, setup_logger, plot_xy, create_figure
-
+from library.models import DeepAutoEncoder
+from library.train import train, validation
 
 def main():
     log_file_name = 'info.log'
@@ -55,7 +54,7 @@ def main():
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(params=model.parameters() ,lr=1e-3)
 
-    num_epochs = 1
+    num_epochs = 5
     dict_losses = {  'epochs': [],
                     'train_losses': [],
                     'validation_losses': []}

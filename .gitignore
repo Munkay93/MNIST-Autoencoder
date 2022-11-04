@@ -1,2 +1,4 @@
-./results
-!./results/training/01_Examples/*
+__pycache__/
+
+/results/training/*
+!/results/training/01_Examples/
