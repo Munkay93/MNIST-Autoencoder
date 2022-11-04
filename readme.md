@@ -16,4 +16,4 @@ Training parameters:
 
 - [ ] save training parameters for each run 
 - [ ] create table with training parameters in readme
-- [ ] reshape reame images 
+- [ ] reshape readme images 
