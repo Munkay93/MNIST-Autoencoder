@@ -1,0 +1,38 @@
+INFO:root:Started
+INFO:root:DeepAutoEncoder(
+  (encoder): Sequential(
+    (0): Linear(in_features=784, out_features=128, bias=True)
+    (1): ReLU(inplace=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+    (3): ReLU(inplace=True)
+    (4): Linear(in_features=64, out_features=32, bias=True)
+    (5): ReLU(inplace=True)
+  )
+  (decoder): Sequential(
+    (0): Linear(in_features=32, out_features=64, bias=True)
+    (1): ReLU(inplace=True)
+    (2): Linear(in_features=64, out_features=128, bias=True)
+    (3): ReLU(inplace=True)
+    (4): Linear(in_features=128, out_features=784, bias=True)
+  )
+)
+INFO:root:Epoch: 1 	 train_loss: 0.027370 	 val_loss: 0.027084
+INFO:root:Epoch: 2 	 train_loss: 0.023423 	 val_loss: 0.023127
+INFO:root:Epoch: 3 	 train_loss: 0.020901 	 val_loss: 0.020634
+INFO:root:Epoch: 4 	 train_loss: 0.019597 	 val_loss: 0.019350
+INFO:root:Epoch: 5 	 train_loss: 0.019161 	 val_loss: 0.018954
+INFO:root:Epoch: 6 	 train_loss: 0.018819 	 val_loss: 0.018629
+INFO:root:Epoch: 7 	 train_loss: 0.018526 	 val_loss: 0.018346
+INFO:root:Epoch: 8 	 train_loss: 0.017884 	 val_loss: 0.017712
+INFO:root:Epoch: 9 	 train_loss: 0.017448 	 val_loss: 0.017272
+INFO:root:Epoch: 10 	 train_loss: 0.017221 	 val_loss: 0.017054
+INFO:root:Epoch: 11 	 train_loss: 0.016972 	 val_loss: 0.016804
+INFO:root:Epoch: 12 	 train_loss: 0.016712 	 val_loss: 0.016547
+INFO:root:Epoch: 13 	 train_loss: 0.016540 	 val_loss: 0.016384
+INFO:root:Epoch: 14 	 train_loss: 0.016408 	 val_loss: 0.016261
+INFO:root:Epoch: 15 	 train_loss: 0.016148 	 val_loss: 0.016002
+INFO:root:Epoch: 16 	 train_loss: 0.015917 	 val_loss: 0.015763
+INFO:root:Epoch: 17 	 train_loss: 0.015757 	 val_loss: 0.015608
+INFO:root:Epoch: 18 	 train_loss: 0.015699 	 val_loss: 0.015563
+INFO:root:Epoch: 19 	 train_loss: 0.015625 	 val_loss: 0.015498
+INFO:root:Epoch: 20 	 train_loss: 0.015655 	 val_loss: 0.015537
