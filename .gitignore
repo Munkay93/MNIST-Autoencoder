@@ -1,4 +1,5 @@
 __pycache__/
+.vscode
 
 /results/training/*
 !/results/training/01_Examples/
