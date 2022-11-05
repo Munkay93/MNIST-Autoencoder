@@ -18,9 +18,9 @@ class Linear_Decoder(nn.Module):
         super().__init__()
         self.decoder = nn.Sequential(
             nn.Linear(encoding_dim, 64),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.Linear(64, 128),
-            nn.ReLU(True), 
+            nn.ReLU(), 
             nn.Linear(128, output_dim),
             nn.Sigmoid()
         )
@@ -34,11 +34,11 @@ class Linear_Encoder(nn.Module):
         super().__init__()
         self.encoder = nn.Sequential(
             nn.Linear(input_dim, 128),
-            nn.ReLU(True),
+            nn.ReLU(),
             nn.Linear(128, 64),
-            nn.ReLU(True), 
+            nn.ReLU(), 
             nn.Linear(64, encoding_dim), 
-            nn.ReLU(True),
+            nn.ReLU(),
         )
     def forward(self, x):
         encoded = self.encoder(x)
