@@ -1,16 +1,22 @@
 # MNIST-Autoencoder
 
 
-## Training
+## Training Linear AE
 Training parameters:
 
-![alt text](./results/training/01_Examples/100_Epochs_linear_AE/images/loss.svg)
+![alt text](./results/training/01_Examples/linear_AE_example/images/loss.svg)
 
-![alt text](./results/training/01_Examples/100_Epochs_linear_AE/images/Reconstruction%20progress.svg)
+![alt text](./results/training/01_Examples/linear_AE_example/images/Reconstruction%20progress.svg)
 
-## Inference
+## Inference Linear AE
 
-![alt text](./results/inference/01_Examples/run_20221104_224926/results.svg)
+![alt text](./results/inference/01_Examples/readme_example/results.svg)
+
+## Training CNN AE
+![alt text](./results/training/01_Examples/CNN_AE_example/images/loss.svg)
+![alt text](./results/training/01_Examples/CNN_AE_example/images/Reconstruction%20progress.svg)
+
+## Inference CNN AE
 
 ## TODO
 
