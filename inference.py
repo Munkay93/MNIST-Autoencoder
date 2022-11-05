@@ -27,7 +27,12 @@ model = torch.jit.load(PATH)
 model.eval()
 print(model)
 
-fig, axs = plt.subplots(2, 10)
+fig = plt.figure()
+subfigs = fig.subfigures(2)
+subfigs[0].suptitle('Ground Truth')
+subfigs[1].suptitle('Reconstruction')
+axs_row_1 = subfigs[0].subplots(1, 10)
+axs_row_2 = subfigs[1].subplots(1, 10)
 
 for i in range(10):
     data, _ = testset[i]
@@ -35,8 +40,8 @@ for i in range(10):
     recon = model(data_flatten)
     recon = recon.view(input_size[1], input_size[2])
     data = torch.squeeze(data)
-    axs[0][i].imshow(data.detach().numpy())
-    axs[0][i].axis('off')
-    axs[1][i].imshow(recon.detach().numpy())
-    axs[1][i].axis('off')
+    axs_row_1[i].imshow(data.detach().numpy())
+    axs_row_1[i].axis('off')
+    axs_row_2[i].imshow(recon.detach().numpy())
+    axs_row_2[i].axis('off')
     plt.savefig(os.path.join(dir_run, 'results.svg'))
