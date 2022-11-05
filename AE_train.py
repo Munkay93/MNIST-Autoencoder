@@ -9,7 +9,7 @@ import os
 import logging
 import pickle
 # My Modules
-from library.utils import makedir, setup_logger, plot_xy, create_figure, SaveBestModel
+from library.utils import makedir, setup_logger, plot_xy, create_figure, SaveBestModel, Progress_images
 from library.models import DeepAutoEncoder
 from library.train import train, validation
 
@@ -34,9 +34,9 @@ def main():
     trainset = MNIST(root=dir_datasets, train=True, download=True, transform=transform)
     testset = MNIST(root=dir_datasets, train=False, transform=transform)
 
-    # indices = torch.arange(1000)
-    # trainset = Subset(trainset, indices)
-    # testset = Subset(testset, indices)
+    indices = torch.arange(1000)
+    trainset = Subset(trainset, indices)
+    testset = Subset(testset, indices)
 
     # create Dataloaders
     trainloader = DataLoader(dataset=trainset, batch_size=64)
@@ -54,23 +54,12 @@ def main():
     optimizer = torch.optim.Adam(params=model.parameters() ,lr=1e-3)
     save_best_model = SaveBestModel()
     num_epochs = 100
+
     checkpoint_path = os.path.join(dir_run, 'checkpoint.pt')
     model_path = os.path.join(dir_run, 'model.pt')
 
     # setup figures for progress results
-    num_progress_steps = 5
-    step_size = int(num_epochs/num_progress_steps)
-    fig = plt.figure()
-    subfigs = fig.subfigures(2,1, wspace=0.07)
-    subfigs[0].suptitle('Ground Truth')
-    subfigs[1].suptitle('Reconstruction')
-    axs_top = subfigs[0].subplots(1)
-
-    if num_epochs%step_size == 0:
-        axs_bottom = subfigs[1].subplots(1, num_progress_steps)
-    else:
-        axs_bottom = subfigs[1].subplots(1, num_progress_steps+1)
-    cnt = 0
+    progress_image = Progress_images(num_epochs)
 
     # Training
     dict_losses = {  'epochs': [],
@@ -91,18 +80,7 @@ def main():
         dict_losses['validation_losses'].append(val_loss) 
 
         # create progress results
-        if epoch%step_size == 0 or epoch == num_epochs:
-            device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-            model.to(device)
-            img = testset[0][0].to(device)
-            img = torch.flatten(img, start_dim=1)
-            recon = model(img)
-            recon = torch.reshape(recon,(28, 28))
-            recon = recon.cpu().detach().numpy()
-            axs_bottom[cnt].imshow(recon)
-            axs_bottom[cnt].set_title(f'Epoch {epoch+1}')
-            axs_bottom[cnt].axis('off')
-            cnt += 1
+        progress_image(model, testset, epoch)
 
     # save best model as TorchScript Format
     model = DeepAutoEncoder(input_dim=input_size, encoding_dim=embedding_size)
@@ -111,13 +89,8 @@ def main():
     model_scripted = torch.jit.script(model) # Export to TorchScript
     model_scripted.save(model_path) # Save
 
-    # finalize progress results and save it
-    img = torch.reshape(img,(28, 28))
-    img = img.cpu().detach().numpy()
-    axs_top.imshow(img)
-    axs_top.axis('off')
-    plt.savefig(os.path.join(dir_img, 'Reconstruction progress.svg'))
- 
+    progress_image.save(dir_img)
+
     # plot loss epoch charts
     fig = create_figure(xlabel='Epochs',
                         ylabel='Losses',
