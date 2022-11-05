@@ -82,10 +82,10 @@ def main():
                     'train_losses': [],
                     'validation_losses': []}
     for epoch in range(num_epochs):
-        train(model=model, trainloader=trainloader, criterion=criterion, optimizer=optimizer)
+        train(model=model, trainloader=trainloader, criterion=criterion, optimizer=optimizer, flatten=False)
 
-        train_loss = validation(model=model, loader=trainloader, criterion=criterion)
-        val_loss = validation(model=model, loader=testloader, criterion=criterion)
+        train_loss = validation(model=model, loader=trainloader, criterion=criterion, flatten=False)
+        val_loss = validation(model=model, loader=testloader, criterion=criterion, flatten=False)
 
         save_best_model(val_loss, epoch, model, optimizer, criterion, checkpoint_path)
 
