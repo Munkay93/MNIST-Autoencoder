@@ -34,9 +34,9 @@ def main():
     trainset = MNIST(root=dir_datasets, train=True, download=True, transform=transform)
     testset = MNIST(root=dir_datasets, train=False, transform=transform)
 
-    indices = torch.arange(1000)
-    trainset = Subset(trainset, indices)
-    testset = Subset(testset, indices)
+    # indices = torch.arange(1000)
+    # trainset = Subset(trainset, indices)
+    # testset = Subset(testset, indices)
 
     batchsize = 64
     # create Dataloaders
@@ -85,10 +85,10 @@ def main():
                     'train_losses': [],
                     'validation_losses': []}
     for epoch in range(num_epochs):
-        train(model=model, trainloader=trainloader, criterion=criterion, optimizer=optimizer)
+        train(model=model, trainloader=trainloader, criterion=criterion, optimizer=optimizer, flatten=True)
 
-        train_loss = validation(model=model, loader=trainloader, criterion=criterion)
-        val_loss = validation(model=model, loader=testloader, criterion=criterion)
+        train_loss = validation(model=model, loader=trainloader, criterion=criterion, flatten=True)
+        val_loss = validation(model=model, loader=testloader, criterion=criterion, flatten=True)
 
         save_best_model(val_loss, epoch, model, optimizer, criterion, checkpoint_path)
 
@@ -99,7 +99,7 @@ def main():
         dict_losses['validation_losses'].append(val_loss) 
 
         # create progress results
-        progress_image(model, testset, epoch)
+        progress_image(model, testset, epoch, flatten=True)
 
     # Best Validation Loss
     min_val_loss = min(dict_losses['validation_losses'])
