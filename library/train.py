@@ -6,7 +6,6 @@ def train(model, trainloader, criterion, optimizer):
     model.train()
     for batch_input in trainloader:
         imgs, _ = batch_input
-        imgs = torch.flatten(imgs, start_dim=1)
         imgs = imgs.to(device)
         recons = model(imgs)
         loss = criterion(imgs, recons)
@@ -21,7 +20,6 @@ def validation(model, loader, criterion):
     loss_batch = 0.0
     for batch_input in loader:
         imgs, _ = batch_input
-        imgs = torch.flatten(imgs, start_dim=1)
         imgs = imgs.to(device='cuda')
         recons = model(imgs)
         loss = criterion(imgs, recons)

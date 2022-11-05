@@ -108,12 +108,14 @@ class Progress_images:
             self.axs_bottom = subfigs[1].subplots(1, num_progress_steps+1)
         self.cnt = 0
 
-    def __call__(self, model, testset, epoch):
+    def __call__(self, model, testset, epoch, flatten):
         if epoch%self.step_size == 0 or epoch == self.num_epochs:
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             model.to(device)
             img = testset[0][0].to(device)
-            img = torch.flatten(img, start_dim=1)
+            img = img[None, :,:,:]
+            if flatten:
+                img = torch.flatten(img, start_dim=1)
             recon = model(img)
             recon = torch.reshape(recon,(28, 28))
             recon = recon.cpu().detach().numpy()
