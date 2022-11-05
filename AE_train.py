@@ -34,26 +34,45 @@ def main():
     trainset = MNIST(root=dir_datasets, train=True, download=True, transform=transform)
     testset = MNIST(root=dir_datasets, train=False, transform=transform)
 
-    indices = torch.arange(1000)
-    trainset = Subset(trainset, indices)
-    testset = Subset(testset, indices)
+    # indices = torch.arange(1000)
+    # trainset = Subset(trainset, indices)
+    # testset = Subset(testset, indices)
 
+    batchsize = 64
     # create Dataloaders
-    trainloader = DataLoader(dataset=trainset, batch_size=64)
-    testloader = DataLoader(dataset=testset, batch_size=64)
+    trainloader = DataLoader(dataset=trainset, batch_size=batchsize)
+    testloader = DataLoader(dataset=testset, batch_size=batchsize)
 
     # get input size
     input_size = trainloader.dataset[0][0].size()
     input_size = input_size[1]*input_size[2]
 
 
-    embedding_size = 32
+    embedding_size = 2
     model = DeepAutoEncoder(input_dim=input_size, encoding_dim=embedding_size)
+    logging.info('')
+    logging.info('---Model Architecure---')
     logging.info(model)
     criterion = nn.MSELoss()
-    optimizer = torch.optim.Adam(params=model.parameters() ,lr=1e-3)
+    lr =1e-3
+    optimizer = torch.optim.Adam(params=model.parameters() ,lr=lr)
     save_best_model = SaveBestModel()
-    num_epochs = 100
+    num_epochs = 10
+
+    logging.info('')
+    logging.info(f'---Dataset Information---')
+    logging.info(f'Datasetsize: {len(trainset)+len(testset)}')
+    logging.info(f'Trainset size: {len(trainset)}')
+    logging.info(f'Testset size: {len(testset)}')
+    logging.info('')
+    logging.info(f'---Trainingsparameter---')
+    logging.info(f'Model: {model.__class__.__name__}')
+    logging.info(f'Encoding size: {embedding_size}')
+    logging.info(f'Number of Epochs: {num_epochs}')
+    logging.info(f'Train Criterion: {criterion.__class__.__name__}')
+    logging.info(f'Optimizer: {optimizer.__class__.__name__}')
+    logging.info(f'Learninrate: {lr}')
+    logging.info('')
 
     checkpoint_path = os.path.join(dir_run, 'checkpoint.pt')
     model_path = os.path.join(dir_run, 'model.pt')
@@ -81,6 +100,14 @@ def main():
 
         # create progress results
         progress_image(model, testset, epoch)
+
+    # Best Validation Loss
+    min_val_loss = min(dict_losses['validation_losses'])
+    index = dict_losses['validation_losses'].index(min_val_loss)
+    best_epoch = dict_losses['epochs'][index]
+    logging.info('')
+    logging.info(f'Minium Validation loss: {min_val_loss}') 
+    logging.info(f'Best Epoch: {best_epoch}') 
 
     # save best model as TorchScript Format
     model = DeepAutoEncoder(input_dim=input_size, encoding_dim=embedding_size)
