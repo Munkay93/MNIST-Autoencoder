@@ -1,6 +1,6 @@
 import os
 import torch
-from library.models import AE, AutoEncoder, DeepAutoEncoder
+# from library.models import AE, AutoEncoder, DeepAutoEncoder
 from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
 import matplotlib.pyplot as plt
@@ -12,10 +12,9 @@ from library.utils import makedir
 
 date = datetime.today().strftime('%Y%m%d_%H%M%S') 
 
-PATH = './results/training/01_Examples/readme_example/model.pt'
+PATH = './results/training/01_Examples/linear_AE_example/model.pt'
 dir_results = makedir('results')
 dir_inference = makedir('inference', dir_results)
-dir_run = makedir(f'run_{date}',dir_inference)
 
 transform = ToTensor()
 testset = MNIST(root='datasets/', train=False, transform=transform) 
@@ -26,6 +25,8 @@ input_size_flatten = input_size[1]*input_size[2]
 model = torch.jit.load(PATH)
 model.eval()
 print(model)
+
+dir_run = makedir(f'{model.original_name}_{date}',dir_inference)
 
 fig = plt.figure()
 subfigs = fig.subfigures(2)
