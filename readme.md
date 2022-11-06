@@ -20,6 +20,6 @@ Training parameters:
 
 ## TODO
 
-- [ ] save training parameters for each run 
+- [x] save training parameters for each run 
 - [ ] create table with training parameters in readme
-- [ ] reshape readme images 
+- [x] reshape readme images 
