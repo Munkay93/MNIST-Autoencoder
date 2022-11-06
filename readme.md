@@ -10,7 +10,6 @@ Training parameters:
 
 ## Inference Linear AE
 
-![alt text](./results/inference/01_Examples/readme_example/results.svg)
 
 ## Training CNN AE
 ![alt text](./results/training/01_Examples/CNN_AE_example/images/loss.svg)
@@ -18,6 +17,7 @@ Training parameters:
 
 ## Inference CNN AE
 
+![alt text](./results/inference/01_Examples/CNN_AE_example/results.svg)
 ## TODO
 
 - [x] save training parameters for each run 
