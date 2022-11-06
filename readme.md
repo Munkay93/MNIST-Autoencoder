@@ -10,6 +10,7 @@ Training parameters:
 
 ## Inference Linear AE
 
+![alt text](./results/inference/01_Examples/linear_AE_example/results.svg)
 
 ## Training CNN AE
 ![alt text](./results/training/01_Examples/CNN_AE_example/images/loss.svg)
