@@ -33,6 +33,7 @@ Testset size: 10000
 
 **---Trainingsparameter---**\
 Model: CNN_AE\
+Encoding size: 4\
 Number of Epochs: 50\
 Train Criterion: MSELoss\
 Optimizer: Adam\
